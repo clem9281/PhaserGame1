@@ -5,10 +5,10 @@ class SceneA extends Phaser.Scene {
     super({ key: "SceneA", active: true });
   }
   preload() {
-    this.load.image("stars", "/assets/spaceparts/stars.png");
-    this.load.image("ship1", "/assets/sprites/ship1.png");
-    this.load.image("cursor", "/assets/sprites/crosshairs.png");
-    this.load.image("tiles", "/assets/spaceparts/tiles2.tsx");
+    this.load.image("stars", "assets/spaceparts/stars.png");
+    this.load.image("ship1", "assets/sprites/ship1.png");
+    this.load.image("cursor", "assets/sprites/crosshairs.png");
+    this.load.image("tiles", "assets/spaceparts/tiles2.tsx");
     this.load.tilemapTiledJSON(
       "map",
       "..assets/spaceparts/tilemapstarsplanets1.json"
