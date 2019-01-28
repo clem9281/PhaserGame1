@@ -8,17 +8,29 @@ class SceneA extends Phaser.Scene {
     this.load.image("stars", "assets/spaceparts/stars.png");
     this.load.image("ship1", "assets/sprites/ship1.png");
     this.load.image("cursor", "assets/sprites/crosshairs.png");
-    this.load.image("tiles", "assets/spaceparts/tiles2.tsx");
+    this.load.image("startiles", "assets/spaceparts/tiles/starTiles.png");
+    this.load.image("planettiles", "assets/spaceparts/tiles/planetTiles.png");
     this.load.tilemapTiledJSON(
       "map",
-      "..assets/spaceparts/tilemapstarsplanets1.json"
+      "assets/spaceparts/tiles/planetsandstars2MAP..json"
     );
   }
   create() {
-    this.stars = this.add.tileSprite(0, 0, game.width, game.height, "stars");
-    // let map = this.make.tilemap({ key: "map" });
-    // let tileset = map.addTilesetImage("tiles2", "tiles");
-    // let bottom = map.createStaticLayer(tileset, 0, 0);
+    console.log(this.cache.tilemap.get("map").data);
+    let map = this.add.tilemap("map");
+    let startiles = map.addTilesetImage("starTiles", "startiles");
+    let starLayer = map.createStaticLayer("sky", startiles, 0, 0);
+    let planettiles = map.addTilesetImage("planetTiles", "planettiles");
+    let smallPlanetLayer = map.createStaticLayer(
+      "smallplanets",
+      planettiles,
+      0,
+      0
+    );
+    let sunLayer = map.createStaticLayer("sun", planettiles, 0, 0);
+    let iceplanetLayer = map.createStaticLayer("iceplanet", planettiles, 0, 0);
+    let gasgiantLayer = map.createStaticLayer("gasgiant", planettiles, 0, 0);
+    let exoplanetLayer = map.createStaticLayer("exoplanet", planettiles, 0, 0);
     this.cursor = this.add.image(0, 0, "cursor").setVisible(false);
     player = this.physics.add
       .sprite(
@@ -48,6 +60,13 @@ class SceneA extends Phaser.Scene {
       this.physics.moveToObject(player, this.input.activePointer, 700);
 
       player.rotation =
+        Phaser.Math.Angle.Between(
+          player.x,
+          player.y,
+          this.input.activePointer.x,
+          this.input.activePointer.y
+        ) + 1.57;
+      let lastDirection =
         Phaser.Math.Angle.Between(
           player.x,
           player.y,
