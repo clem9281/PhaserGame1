@@ -29,6 +29,7 @@ class SceneA extends Phaser.Scene {
         "ship1"
       )
       .setVelocity(0, 0);
+    player.body.onOverlap = true;
     // .setAngularDrag(40)
     // .setAngularVelocity(-40);
     console.log(player.body);
@@ -40,7 +41,7 @@ class SceneA extends Phaser.Scene {
 
   update() {
     if (this.input.activePointer.isDown) {
-      // console.log(this.input.activePointer);
+      console.log(this.input.activePointer);
       this.cursor
         .setVisible(true)
         .setPosition(this.input.activePointer.x, this.input.activePointer.y);
@@ -53,6 +54,12 @@ class SceneA extends Phaser.Scene {
           this.input.activePointer.x,
           this.input.activePointer.y
         ) + 1.57;
+      if (
+        player.x === this.input.activePointer.x ||
+        player.y === this.input.activePointer.y
+      ) {
+        player.body.setVelocity(0);
+      }
     } else if (!this.input.activePointer.isUp) {
       this.cursor.setVisible(false);
     }
