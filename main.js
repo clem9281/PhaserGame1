@@ -5,9 +5,11 @@ let config = {
   physics: {
     default: "arcade",
     arcade: {
+      // debug: true,
       gravity: false
     }
   },
+
   inputMouse: true,
   inputTouch: true,
   parent: "game-container",
