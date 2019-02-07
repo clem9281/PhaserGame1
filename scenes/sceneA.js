@@ -7,6 +7,8 @@ class SceneA extends Phaser.Scene {
   preload() {
     this.load.image("ship1", "assets/sprites/ship1.png");
     this.load.image("cursor", "assets/sprites/crosshairs.png");
+    this.load.image("fire", "assets/sprites/fire.png");
+    this.load.image("fire", "assets/sprites/laser.png");
     this.load.image("startiles", "assets/spaceparts/tiles/starTiles.png");
     this.load.image("planettiles", "assets/spaceparts/tiles/planetTiles.png");
     this.load.tilemapTiledJSON(
@@ -48,35 +50,35 @@ class SceneA extends Phaser.Scene {
       .setVelocity(0, 0);
     player.body.onOverlap = true;
     player.body.setCollideWorldBounds(true);
-    console.log(this);
-    console.log("body", player);
+
+    // this.fire = this.add.image(100, 100, "fire");
+    // this.fire.displayWidth = 20;
+    // this.fire.displayHeight = 20;
+    // console.log(this.fire);
 
     // camera
     this.cameras.main.startFollow(player);
     this.cameras.main.setBounds(0, 0, starLayer.width, starLayer.height);
-    console.log("camera", this.cameras);
-    console.log(this.physics);
-    console.log("cursor", this.cursor);
   }
 
   update() {
     if (this.input.activePointer.isDown) {
       this.cursor.setVisible(true);
-      // movement
-      if (this.input.activePointer.x > 480) {
+      // movement:
+      if (this.input.activePointer.x >= 480.5555) {
         this.cursor.setX(
           this.cameras.main.midPoint.x + this.input.activePointer.x - 480
         );
-      } else if (this.input.activePointer.x < 480) {
+      } else if (this.input.activePointer.x <= 480.5554) {
         this.cursor.setX(
           this.cameras.main.midPoint.x - (480 - this.input.activePointer.x)
         );
       }
-      if (this.input.activePointer.y < 640) {
+      if (this.input.activePointer.y <= 640.5554) {
         this.cursor.setY(
           this.cameras.main.midPoint.y - (640 - this.input.activePointer.y)
         );
-      } else if (this.input.activePointer.y > 640) {
+      } else if (this.input.activePointer.y >= 640.5555) {
         this.cursor.setY(
           this.cameras.main.midPoint.y + this.input.activePointer.y - 640
         );

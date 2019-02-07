@@ -25,3 +25,10 @@ let config = {
 };
 
 let game = new Phaser.Game(config);
+let fpsConfig = {
+  min: 50,
+  target: 60
+};
+
+// let timestep = new TimeStep(game, fpsConfig);
+// console.log(timestep);
